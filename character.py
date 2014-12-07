@@ -13,10 +13,12 @@ class character(pygame.sprite.Sprite)
     isGrounded = True
     hasDouble = True
     sprinting = False
-    def __init__(self, startPosX, startPosY):
+    def __init__(self, startPosX, startPosY, width, height):
         pygame.sprite.Sprite.__init__(self)
         self.posx = startPosX
         self.posy = startPosY
+        self.width = width
+        self.height = height
 
     def jump(self):
         if self.isGrounded:
@@ -40,3 +42,7 @@ class character(pygame.sprite.Sprite)
 
     def stopMoving():
         self.XVel = 0
+
+    def landed():
+        self.isGrounded  = True
+        self.hasDouble = True
