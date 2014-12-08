@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-class character(pygame.sprite.Sprite)
+class character(pygame.sprite.Sprite):
     grvaity = 6.28
     XVel = 0
     Yvel = 0
@@ -13,36 +13,44 @@ class character(pygame.sprite.Sprite)
     isGrounded = True
     hasDouble = True
     sprinting = False
-    def __init__(self, startPosX, startPosY, width, height):
+    def __init__(self, startPosX, startPosY):
         pygame.sprite.Sprite.__init__(self)
         self.posx = startPosX
         self.posy = startPosY
-        self.width = width
-        self.height = height
+        self.width = 13
+        self.height = 25
 
     def jump(self):
         if self.isGrounded:
-            yVel = jumpVel
-            isGrounded = False
+            self.yVel = self.jumpVel
+            self.isGrounded = False
         elif self.hasDouble:
-            yVel = jumpVel
-            hasDouble = False   
+            self.yVel = self.jumpVel
+            self.hasDouble = False
 
-    def walkLeft():
-        self.XVel = -groundVel
+    def walkLeft(self):
+        self.XVel = -self.groundVel
 
-    def sprintLeft():
-        self.XVel = -sprintVel
+    def sprintLeft(self):
+        self.XVel = -self.sprintVel
 
-    def walkRight():
-        self.XVel = -groundVel
+    def walkRight(self):
+        self.XVel = -self.groundVel
 
-    def sprintRight():
-        self.XVel = -sprintVel
+    def sprintRight(self):
+        self.XVel = -self.sprintVel
 
-    def stopMoving():
+    def stopMoving(self):
         self.XVel = 0
 
-    def landed():
+    def landed(self):
         self.isGrounded  = True
         self.hasDouble = True
+
+    def render(self,collision):
+        self.black = (0,0,0)
+        self.white = (255,255,255)
+        self.red = (255,25,25)
+        self.window = pygame.display.set_mode((800,600))
+        pygame.draw.rect(self.window,self.red,(self.posx,self.posy,self.width,self.height))
+        pygame.draw.rect(self.window,self.black,(self.posx,self.posy,self.width,self.height))
