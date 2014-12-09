@@ -10,12 +10,11 @@ class Sprite:
         self.width=width
         self.height=height
 
-    def render(self,collision):
+    def render(self,collision,window):
         self.black = (0,0,0)
         self.white = (255,255,255)
         self.red = (255,25,25)
-        self.window = pygame.display.set_mode((800,600))
         if (collision==True):
-            pygame.draw.rect(self.window,self.red,(self.posx,self.posy,self.width,self.height))
+            pygame.draw.rect(window,self.red,(self.posx,self.posy,self.width,self.height))
         else:
-            pygame.draw.rect(self.window,self.black,(self.posx,self.posy,self.width,self.height))         
+            pygame.draw.rect(window,self.black,(self.posx,self.posy,self.width,self.height))
