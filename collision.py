@@ -13,6 +13,7 @@ white = (255,255,255)
 red = (255,25,25)
 SCALE = 100
 clock = pygame.time.Clock()
+colorred = False
 
 class myCollision:
 
@@ -40,5 +41,5 @@ class myCollision:
         c = myCollision()
         checkerSprite = Sprite(Sprite2.posx,Sprite2.posy,Sprite2.width,5)
         if c.detectCollisions(Sprite1, checkerSprite)is True:
-            #blah
-            Sprite1.isGrounded = True
+            Sprite1.landed()
+            
