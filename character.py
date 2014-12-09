@@ -2,7 +2,7 @@ import pygame
 import sys
 
 class character(pygame.sprite.Sprite):
-    grvaity = 6.28
+    gravity = 6.28
     XVel = 0
     YVel = 0
     jumpVel = 10
@@ -22,11 +22,12 @@ class character(pygame.sprite.Sprite):
 
     def jump(self):
         if self.isGrounded:
-            self.yVel = -self.jumpVel
+            self.YVel = -self.jumpVel
             self.isGrounded = False
-        elif self.hasDouble:
-            self.yVel = -self.jumpVel
-            self.hasDouble = False
+        self.isGrounded = False
+#        elif self.hasDouble:
+#            self.yVel = -self.jumpVel
+#            self.hasDouble = False
 
     def walkLeft(self):
         self.XVel = -self.groundVel
@@ -49,6 +50,11 @@ class character(pygame.sprite.Sprite):
 
     def render(self,collision,window):
         self.posx += self.XVel
+        self.posy += self.YVel
+        if self.posy > 200:
+            self.posy += self.gravity
+        print "x",self.XVel
+        print "y", self.YVel
         self.posy += self.YVel
         self.black = (0,0,0)
         self.white = (255,255,255)
