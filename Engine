@@ -4,8 +4,8 @@ from Character import character
 from Platform import Sprite
 from collision import myCollision
 
-Sprite1=character(100,50) #CHARACTER
-Sprite2=Sprite(300,50,100,100)
+Sprite1=character(300,150) #CHARACTER
+Sprite2=Sprite(300,180,100,100)
 
 moveX,moveY=0,0
 
