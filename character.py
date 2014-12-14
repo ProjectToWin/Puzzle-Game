@@ -2,10 +2,10 @@ import pygame
 import sys
 
 class character(pygame.sprite.Sprite):
-    gravity = 2
+    gravity = .1
     XVel = 0
     YVel = 0
-    jumpVel = 10
+    jumpVel = 5
     groundVel = 5
     sprintVel = 7
     left = False
@@ -32,7 +32,6 @@ class character(pygame.sprite.Sprite):
         if self.isGrounded == False:
             self.YVel += self.gravity
 
-
     def walkLeft(self):
         self.XVel = -self.groundVel
 
@@ -57,7 +56,6 @@ class character(pygame.sprite.Sprite):
         self.posx += self.XVel
         self.posy += self.YVel
         self.inAir()
-        self.posy += self.YVel
         self.black = (0,0,0)
         self.white = (255,255,255)
         self.red = (255,25,25)
