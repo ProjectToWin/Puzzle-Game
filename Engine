@@ -42,8 +42,6 @@ while gameLoop:
 #            if (event.key==pygame.K_DOWN):
 #                moveY=0
     window.fill(white)
-#    Sprite1.posx+=moveX
-#    Sprite1.posy+=moveY
     collisions= dc.detectCollisions(Sprite1,Sprite2)
     dc.checkGrounded(Sprite1,Sprite2)
     Sprite1.render(collisions,window)
