@@ -41,5 +41,7 @@ class myCollision:
         c = myCollision()
         checkerSprite = Sprite(Sprite2.posx,Sprite2.posy,Sprite2.width,5)
         if c.detectCollisions(Sprite1, checkerSprite)is True:
+#            Sprite1.posy = Sprite2.posy-Sprite1.height-1
             Sprite1.landed()
-            
+        if c.detectCollisions(Sprite1, checkerSprite)is False:
+            Sprite1.isGrounded = False
