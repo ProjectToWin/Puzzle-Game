@@ -1,9 +1,17 @@
-Platformer
+Puzzle Game
 
-Avery has premade sprites
+Mechanichs:
+Colored Keys to Open doors
+Moving Boulders
+Buttons to move blocks
+Need to Get to an exit to complete level
+Moving enemey blocks which can kill player
 
-Parallax Scolling
+What we need:
 
-We can make characters JUMP!!!!!
-
-Hitboxes/collision
+__Collision__
+On collision with key, a key is picked up and colorKey boolean is changed to true
+On collision with a key door, if colorKey is true, door removed
+When collided with a button, receiving object activates
+When in contact with a boulder, if keyPress in the direction, boulder moves
+If boulder collided with a button, receiving object activates
