@@ -51,7 +51,7 @@ def objtomcvformat():
 		if line[0:2] == 'v ':
 			a, x, y, z = line.split()
 			tempTuple = (float(x), float(y), float(z))
-			listofgeogeoverts.append(templTuple)
+			listofgeoverts.append(templTuple)
 		elif line[0:2] == 'vt':
 			a,x,y = line.split()
 			tempTuple = (float(x), float(y))
