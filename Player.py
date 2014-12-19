@@ -1,13 +1,13 @@
 import pygame
-from Key import Key
+from Key import RedKey,BlueKey,GreenKey
 
 class Player(object):
 
 	def __init__(self):
 		self.rect = pygame.Rect(32,32,16,16)
-		bKey = False
-		rKey = False
-		gKey = False
+		self.bKey = False
+		self.rKey = False
+		self.gKey = False
 
 	def move(self, moveX, moveY, walls, boulders):
 		if moveX !=0:
@@ -48,11 +48,11 @@ class Player(object):
 					boulder.rect.y += -1
 					boulder.moveBoulder(moveX, moveY, walls, boulders)
 
-	def setBKey():
-		self.bKey = True
+#	def setBKey(self):
+#		self.bKey = True
 
-	def setBKey():
-		self.bKey = True
+#	def setBKey(self):
+#		self.bKey = True
 
-	def setBKey():
-		self.bKey = True
+#	def setBKey(self):
+#		self.bKey = True
