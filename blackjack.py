@@ -124,7 +124,7 @@ def checkWin(screen):
     if playerScore > 21:
         screen.blit(lose,(100,300))
     if dealerScore > playerScore:
-        print "You lose"
+        print ("You lose")
 
 #graphics
 pygame.display.set_caption("Get to the red square!")
@@ -142,14 +142,14 @@ while True:
                 addCard(playerHand,shuffledCards)
                 if dealerScore < 17:
                     addCard(dealerHand,shuffledCards)
-                    print dealerHand
-                print playerHand
+                    print (dealerHand)
+                print (playerHand)
                 checkWin()
             if e.key==pygame.K_t:
                 hit(shuffledCards)
                 addCard(dealerHand,shuffledCards)
-                print playerHand
-                print dealerHand
+                print (playerHand)
+                print (dealerHand)
                 checkWin()
             if e.key==pygame.K_r:
                 startPlayer(shuffledCards)
@@ -158,9 +158,9 @@ while True:
                 checkWin()
             if e.key==pygame.K_s:
                 startPlayer(shuffledCards)
-                print playerHand
-                print dealerHand
-                print score(playerHand)
+                print (playerHand)
+                print (dealerHand)
+                print (score(playerHand))
 #                if playerScore == 21
 
 #                cardPlayer = pygame.image.load(("card/"+dealerHand[0]+".png"),(10,10))
