@@ -1,0 +1,33 @@
+level2 = [
+'WWWWWWWWWWWW',
+'WWW        W',
+'WP         W',
+'WWW    WWbWW',
+'WWW    W  WW',
+'WWW    W  WW',
+'WWW    W  WW',
+'WWW    WWOWW',
+'WWW    oWEWW',
+'WWWWWWWWWWWW']
+
+level4 =[
+'WWWWWWWWWWWWWWWW',
+'WW WWWWWWW   WWW',
+'WkB        W WWW',
+'WWOW W W W   KEW',
+'WW   WBW W W WWW',
+'WWWW P Wo    WWW',
+'WWWWWWWWWWWWWWWW']
+
+level5= [
+'WWWWWWWWWWWWWWWW',
+'WWWWWWoWWWWWWWWW',
+'WWWWWWPWWWWWWWWW',
+'W   pW      O  W',
+'W P WW BWW WWEWW',
+'W    WB  WkWWWWW',
+'WWBW W   WrWWWWW',
+'WWyWY    K WWWWW',
+'WWRWW WWWWWWWWWW',
+'WW    WWWWWWWWWW',
+'WWWWWWWWWWWWWWWW']
