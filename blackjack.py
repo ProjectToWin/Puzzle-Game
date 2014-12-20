@@ -3,18 +3,14 @@
 #16/Sept/14
 
 from random import *
-import pygame, os, sys
+import pygame
 
 DECKS = 1
 playerHand = []
 dealerHand = []
 dealerScore = 0
 playerScore = 0
-
-font = pygame.font.SysFont("comicsansms", 72)
-pygame.font.init()
-win = font.render("You Win!", 1, (255,255,0))
-lose = font.render("You Lose",1, (255,255,255))
+doReset = False
 
 CARDPOINTS = {'AD': 11, 'AH': 11, 'AC': 11, 'AS': 11,
               'KD': 10, 'KH': 10, 'KC': 10, 'KS': 10,
@@ -79,6 +75,8 @@ def startHandPlayer(shuffledDeck):
     return (playersScore, playersCards)
 
 def ace(score):
+        if score == 10:
+            return 11
         if score > 10:
             return 1
         else:
@@ -119,19 +117,36 @@ def dealerTurn(deck):
 def checkWin(screen):
     dealerScore = score(dealerHand)
     playerScore = score(playerHand)
-    if dealerScore > 21:
-        screen.blit(win,(100,300))
+    doReset = True
     if playerScore > 21:
         screen.blit(lose,(100,300))
-    if dealerScore > playerScore:
-        print ("You lose")
-
+        print "You lose"
+    elif dealerScore > 21:
+        screen.blit(win,(100,300))
+        print "You win"
+    elif dealerScore > playerScore and dealerScore < 21:
+        screen.blit(lose,(100,300))
+        print "You lose"
+    elif dealerScore == 21:
+        screen.blit(win, (100,300))
+        print "Everyone Wins"
 #graphics
 pygame.display.set_caption("Get to the red square!")
 screen = pygame.display.set_mode((1000, 600))
 
+startPlayer(shuffledCards)
+
 while True:
-    pygame.font.init()
+    pygame.init()
+    gerg = pygame.font.SysFont("comicsansms", 72)
+    small = pygame.font.SysFont("comicsansms", 14)
+    win = gerg.render("You Win!", 1, (255,255,255))
+    lose = gerg.render("You Lose",1, (255,255,255))
+    ins = small.render("'h' to hold and 't' to take/hit. Once you lose or win hit 'r' to reset", 1, (255,255,255))
+    reset = gerg.render("Please press r to reset",1,(255,255,255))
+    screen.fill((255, 0, 0))
+
+
     for e in pygame.event.get():
         if e.type == pygame.QUIT:
             running = False
@@ -139,37 +154,41 @@ while True:
             running = False
         if (e.type==pygame.KEYDOWN):
             if e.key==pygame.K_h:
-                addCard(playerHand,shuffledCards)
                 if dealerScore < 17:
                     addCard(dealerHand,shuffledCards)
-                    print (dealerHand)
-                print (playerHand)
-                checkWin()
+                    print dealerHand
+                print playerHand
+                checkWin(screen)
             if e.key==pygame.K_t:
                 hit(shuffledCards)
-                addCard(dealerHand,shuffledCards)
-                print (playerHand)
-                print (dealerHand)
-                checkWin()
+                playerScore = score(playerHand)
+                if playerScore < 21:
+                    addCard(dealerHand,shuffledCards)
+                print playerHand
+                print dealerHand
+                checkWin(screen)
             if e.key==pygame.K_r:
                 startPlayer(shuffledCards)
                 playerScore = 0
                 dealerScore = 0
-                checkWin()
-            if e.key==pygame.K_s:
+                playerHand = []
+                dealerHand = []
                 startPlayer(shuffledCards)
-                print (playerHand)
-                print (dealerHand)
-                print (score(playerHand))
+            #if e.key==pygame.K_s:
+            #    startPlayer(shuffledCards)
+            #    print playerHand
+            #    print dealerHand
+            #    print score(playerHand)
 #                if playerScore == 21
-
-#                cardPlayer = pygame.image.load(("card/"+dealerHand[0]+".png"),(10,10))
-
+            while doReset is True:
+                screen.blit(reset,(100,300))
 #    cardPlayer = pygame.image.load(("card/"+dealerHand[0]+"png"),10,10)
 #    cardDealer = pygame.image.load("dealer.jpg")
-
-    screen.fill((255, 0, 0))
+#      screen.blit(lose,(400,400))
 #    screen.blit(cardPlayer, (10,10))
+
+    #sets up where the cards are displayed on screen
+    screen.blit(ins, (10,500))
     x=0
     for card in playerHand:
         x+=1
