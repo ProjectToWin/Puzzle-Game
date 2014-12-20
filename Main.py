@@ -94,7 +94,7 @@ class Boulder(object):
 
 class Game():
         def __init__(self):
-                self.gameState = 1
+                self.gameState = 6
 
         def makeLevel(self):
 
@@ -191,6 +191,7 @@ class Game():
                         level = [
                         'WWWWWWWWWWWWWWWW',
                         'WWWWWWoWWWWWWWWW',
+                        'WWWWWW WWWWWWWWW',
                         'WWWWWWPWWWWWWWWW',
                         'W   pW      O  W',
                         'W C WW BWW WWEWW',
@@ -200,7 +201,32 @@ class Game():
                         'WWRWW WWWWWWWWWW',
                         'WW    WWWWWWWWWW',
                         'WWWWWWWWWWWWWWWW']
-                        
+                if self.gameState == 6:
+                        rKey = False
+                        gKey = False
+                        bKey = False
+                        yButton = False
+                        yOn = False
+                        oButton = False
+                        oOn = False
+                        pButton = False
+                        pOn = False
+                        level = [
+                        'WWWWWWWWWWWWWWWW',
+                        'WB     B     B W',
+                        'W B   B B   B  W',
+                        'W  B B   B B   W',
+                        'W   B     B    W',
+                        'W      B       W',
+                        'W  C   B       W',
+                        'W      B       W',
+                        'W      B       W',
+                        'W    BB   B    W',
+                        'W    B B  B    W',
+                        'W    B  B B    BW',
+                        'W    B   BB   BEW',
+                        'WWWWWWWWWWWWWWWW']
+
                 screen = pygame.display.set_mode((len(level[0])*16, len(level)*16))
                 x = y = 0
                 wallsize = len(walls)
@@ -445,8 +471,8 @@ class Game():
                                                 oButton = False
                                         elif hitBoulder.rect.colliderect(orangeButton):
                                                 oButton = False
-                                        else:
-                                                oButton = True
+                                        #else:
+                                        #        oButton = True
                                 if pOn:
                                         screen.blit(PB,purpleButton)
                                         if pButton:
