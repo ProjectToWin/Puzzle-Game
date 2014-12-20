@@ -7,17 +7,22 @@ class Player(object):
 
         def __init__(self, pos):
                 self.rect = pygame.Rect(pos[0],pos[1],16,16)
+                self.moveX = 0
+                self.moveY = 0
 
         def move(self, moveX, moveY):
                 if moveX !=0:
+                        self.moveX = moveX
                         self.moveOneAxis(moveX,0)
                 if moveY !=0:
+                        self.moveY = moveY
                         self.moveOneAxis(0,moveY)
 
         def moveOneAxis(self, moveX, moveY):
                 self.rect.x += moveX
                 self.rect.y += moveY
-                
+                self.moveX = moveX
+                self.moveY = moveY
                 for wall in walls:
                         if self.rect.colliderect(wall.rect):
                                 if moveX > 0:
@@ -49,18 +54,22 @@ class Player(object):
 
 
 class Wall(object):
-
         def __init__(self, pos):
+
                 walls.append(self)
                 self.rect = pygame.Rect(pos[0],pos[1],16,16)
 
 class Boulder(object):
 
         def __init__(self, pos):
+                self.moveX = 0
+                self.moveY = 0
                 boulders.append(self)
                 self.rect = pygame.Rect(pos[0],pos[1],16,16)
 
         def moveBoulder(self, moveX, moveY):
+                self.moveX = moveX
+                self.moveY = moveY
                 for wall in walls:
                         if self.rect.colliderect(wall.rect):
                                 if moveX > 0:
@@ -282,31 +291,31 @@ class Game():
                                         if player.rect.colliderect(redKey):
                                                 rKey = False
                                         if boulder.rect.colliderect(redKey):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = redKey.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = redKey.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = redKey.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = redKey.bottom
                                         if player.rect.colliderect(redDoor):
-                                                if horizontal > 0:
+                                                if player.moveX > 0:
                                                         player.rect.right = redDoor.left
-                                                if horizontal < 0:
+                                                if player.moveX < 0:
                                                         player.rect.left = redDoor.right
-                                                if vertical > 0:
+                                                if player.moveY > 0:
                                                         player.rect.bottom = redDoor.top
-                                                if vertical < 0:
+                                                if player.moveY < 0:
                                                         player.rect.top = redDoor.bottom
                                         if boulder.rect.colliderect(redDoor):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = redDoor.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = redDoor.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = redDoor.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = redDoor.bottom
                                 if gKey:
                                         screen.blit(GK,greenKey)
@@ -314,31 +323,31 @@ class Game():
                                         if player.rect.colliderect(greenKey):
                                                 gKey = False
                                         if boulder.rect.colliderect(greenKey):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = greenKey.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = greenKey.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = greenKey.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = greenKey.bottom
                                         if player.rect.colliderect(greenDoor):
-                                                if horizontal > 0:
+                                                if player.moveX > 0:
                                                         player.rect.right = greenDoor.left
-                                                if horizontal < 0:
+                                                if player.moveX < 0:
                                                         player.rect.left = greenDoor.right
-                                                if vertical > 0:
+                                                if player.moveY > 0:
                                                         player.rect.bottom = greenDoor.top
-                                                if vertical < 0:
+                                                if player.moveY < 0:
                                                         player.rect.top = greenDoor.bottom
                                         if boulder.rect.colliderect(greenDoor):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = greenDoor.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = greenDoor.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = greenDoor.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = greenDoor.bottom
                                 if bKey:
                                         screen.blit(BK,blueKey)
@@ -346,31 +355,31 @@ class Game():
                                         if player.rect.colliderect(blueKey):
                                                 bKey = False
                                         if boulder.rect.colliderect(blueKey):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = blueKey.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = blueKey.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = blueKey.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = blueKey.bottom
                                         if player.rect.colliderect(blueDoor):
-                                                if horizontal > 0:
+                                                if player.moveX > 0:
                                                         player.rect.right = blueDoor.left
-                                                if horizontal < 0:
+                                                if player.moveX < 0:
                                                         player.rect.left = blueDoor.right
-                                                if vertical > 0:
+                                                if player.moveY > 0:
                                                         player.rect.bottom = blueDoor.top
-                                                if vertical < 0:
+                                                if player.moveY < 0:
                                                         player.rect.top = blueDoor.bottom
                                         if boulder.rect.colliderect(blueDoor):
-                                                if horizontal > 0:
+                                                if boulder.moveX > 0:
                                                         boulder.rect.right = blueDoor.left
-                                                if horizontal < 0:
+                                                if boulder.moveX < 0:
                                                         boulder.rect.left = blueDoor.right
-                                                if vertical > 0:
+                                                if boulder.moveY > 0:
                                                         boulder.rect.bottom = blueDoor.top
-                                                if vertical < 0:
+                                                if boulder.moveY < 0:
                                                         boulder.rect.top = blueDoor.bottom
                                 if yOn:
                                         screen.blit(YB,yellowButton)
@@ -382,22 +391,22 @@ class Game():
                                                         yButton = False
                                                         hitBoulder = boulder
                                                 if player.rect.colliderect(yellowDoor):
-                                                        if horizontal > 0:
+                                                        if player.moveX > 0:
                                                                 player.rect.right = yellowDoor.left
-                                                        if horizontal < 0:
+                                                        if player.moveX < 0:
                                                                 player.rect.left = yellowDoor.right
-                                                        if vertical > 0:
+                                                        if player.moveY > 0:
                                                                 player.rect.bottom = yellowDoor.top
-                                                        if vertical < 0:
+                                                        if player.moveY < 0:
                                                                 player.rect.top = yellowDoor.bottom
                                                 if boulder.rect.colliderect(yellowDoor):
-                                                        if horizontal > 0:
+                                                        if boulder.moveX > 0:
                                                                 boulder.rect.right = yellowDoor.left
-                                                        if horizontal < 0:
+                                                        if boulder.moveX < 0:
                                                                 boulder.rect.left = yellowDoor.right
-                                                        if vertical > 0:
+                                                        if boulder.moveY > 0:
                                                                 boulder.rect.bottom = yellowDoor.top
-                                                        if vertical < 0:
+                                                        if boulder.moveY < 0:
                                                                 boulder.rect.top = yellowDoor.bottom
                                         elif player.rect.colliderect(yellowButton): 
                                                 yButton = False
@@ -415,22 +424,22 @@ class Game():
                                                         oButton = False
                                                         hitBoulder = boulder
                                                 if player.rect.colliderect(orangeDoor):
-                                                        if horizontal > 0:
+                                                        if player.moveX > 0:
                                                                 player.rect.right = orangeDoor.left
-                                                        if horizontal < 0:
+                                                        if player.moveX < 0:
                                                                 player.rect.left = orangeDoor.right
-                                                        if vertical > 0:
+                                                        if player.moveY > 0:
                                                                 player.rect.bottom = orangeDoor.top
-                                                        if vertical < 0:
+                                                        if player.moveY < 0:
                                                                 player.rect.top = orangeDoor.bottom
                                                 if boulder.rect.colliderect(orangeDoor):
-                                                        if horizontal > 0:
+                                                        if boulder.moveX > 0:
                                                                 boulder.rect.right = orangeDoor.left
-                                                        if horizontal < 0:
+                                                        if boulder.moveX < 0:
                                                                 boulder.rect.left = orangeDoor.right
-                                                        if vertical > 0:
+                                                        if boulder.moveY > 0:
                                                                 boulder.rect.bottom = orangeDoor.top
-                                                        if vertical < 0:
+                                                        if boulder.moveY < 0:
                                                                 boulder.rect.top = orangeDoor.bottom
                                         elif player.rect.colliderect(orangeButton): 
                                                 oButton = False
@@ -448,22 +457,22 @@ class Game():
                                                         pButton = False
                                                         hitBoulder = boulder
                                                 if player.rect.colliderect(purpleDoor):
-                                                        if horizontal > 0:
+                                                        if player.moveX > 0:
                                                                 player.rect.right = purpleDoor.left
-                                                        if horizontal < 0:
+                                                        if player.moveX < 0:
                                                                 player.rect.left = purpleDoor.right
-                                                        if vertical > 0:
+                                                        if player.moveY > 0:
                                                                 player.rect.bottom = purpleDoor.top
-                                                        if vertical < 0:
+                                                        if player.moveY < 0:
                                                                 player.rect.top = purpleDoor.bottom
                                                 if boulder.rect.colliderect(purpleDoor):
-                                                        if horizontal > 0:
+                                                        if boulder.moveX > 0:
                                                                 boulder.rect.right = purpleDoor.left
-                                                        if horizontal < 0:
+                                                        if boulder.moveX < 0:
                                                                 boulder.rect.left = purpleDoor.right
-                                                        if vertical > 0:
+                                                        if boulder.moveY > 0:
                                                                 boulder.rect.bottom = purpleDoor.top
-                                                        if vertical < 0:
+                                                        if boulder.moveY < 0:
                                                                 boulder.rect.top = purpleDoor.bottom
                                         elif player.rect.colliderect(purpleButton): 
                                                 pButton = False
@@ -522,9 +531,3 @@ vertical = 0
 horizontal = 0
 
 game.makeLevel()
-
-
-
-
-
-
