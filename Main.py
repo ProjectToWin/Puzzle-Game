@@ -255,16 +255,16 @@ class Game():
                         key = pygame.key.get_pressed()
                         if key[pygame.K_LEFT]:
                                 player.move(-2,0)
-                                horizontal = 1
+                                horizontal = 2
                         if key[pygame.K_RIGHT]:
                                 player.move(2,0)
-                                horizontal = -1
+                                horizontal = -2
                         if key[pygame.K_UP]:
                                 player.move(0,-2)
-                                vertical = -1
+                                vertical = -2
                         if key[pygame.K_DOWN]:
                                 player.move(0,2)
-                                vertical = 1
+                                vertical = 2
                         else:
                                 vrtical = 0
                                 horizontal = 0
