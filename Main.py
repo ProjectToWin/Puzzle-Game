@@ -52,7 +52,6 @@ class Wall(object):
                 walls.append(self)
                 self.rect = pygame.Rect(pos[0],pos[1],16,16)
 
-
 class Boulder(object):
 
         def __init__(self, pos):
@@ -86,28 +85,46 @@ pygame.init()
 #pygame.display.setCaption("The Game: Level 1")
 screen = pygame.display.set_mode((320, 240))
 
-WALL = pygame.image.load(os.path.join('sprite', 'wall.png'))
+WALL = pygame.image.load('sprite/wall.png')
+PLAYER = pygame.image.load('sprite/player.png')
+BOULDER = pygame.image.load('sprite/boulder.png')
+RK = pygame.image.load('sprite/redkey.png')
+RD = pygame.image.load('sprite/reddoor.png')
+GK = pygame.image.load('sprite/greenkey.png')
+GD = pygame.image.load('sprite/greendoor.png')
+BK = pygame.image.load('sprite/bluekey.png')
+BD = pygame.image.load('sprite/bluedoor.png')
+YB = pygame.image.load('sprite/yellowbutton.png')
+YD = pygame.image.load('sprite/yellowdoor.png')
+OB = pygame.image.load('sprite/orangebutton.png')
+OD = pygame.image.load('sprite/orangedoor.png')
+PB = pygame.image.load('sprite/purplebutton.png')
+PD = pygame.image.load('sprite/purpledoor.png')
 
 clock = pygame.time.Clock()
 walls = []
 boulders = []
 player = Player()
+global hitBoulder
 
 rKey = False
 gKey = False
 bKey = False
 yButton = True
+yOn = True
 oButton = False
+oOn = False
 pButton = False
+pOn = False
 vertical = 0
 horizontal = 0
 
 level = [
 "WWWWWWWWWWWWWWWWWWWW",
 "W                  W",
-"W         WWWWWW  yW",
+"W         WWWWWW   W",
 "W   WWWW B     W   W",
-"W   W        WWWW  W",
+"W   W    y   WWWW  W",
 "W WWW  WWWW    B   W",
 "W   W     W WW     W",
 "W   W     W   WWWYWW",
@@ -125,6 +142,7 @@ for row in level:
         for col in row:
                 if col == "W":
                         Wall((x,y))
+
                 if col == "B":
                         Boulder((x,y))
                 if col == "r":
@@ -182,69 +200,205 @@ while True:
 
         screen.fill((0,0,0))
         for wall in walls:
-                pygame.draw.rect(screen,(255,255,255),wall.rect)
-                wall.rect.blit(WALL,(0,0))
+                screen.blit(WALL,wall.rect)
+        for boulder in boulders:       
+                if rKey:
+                        screen.blit(RK,redKey)
+                        screen.blit(RD,redDoor)
+                        if player.rect.colliderect(redKey):
+                                rKey = False
+                        if boulder.rect.colliderect(redKey):
+                                if horizontal > 0:
+                                        boulder.rect.right = redKey.left
+                                if horizontal < 0:
+                                        boulder.rect.left = redKey.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = redKey.top
+                                if vertical < 0:
+                                        boulder.rect.top = redKey.bottom
+                        if player.rect.colliderect(redDoor):
+                                if horizontal > 0:
+                                        player.rect.right = redDoor.left
+                                if horizontal < 0:
+                                        player.rect.left = redDoor.right
+                                if vertical > 0:
+                                        player.rect.bottom = redDoor.top
+                                if vertical < 0:
+                                        player.rect.top = redDoor.bottom
+                        if boulder.rect.colliderect(redDoor):
+                                if horizontal > 0:
+                                        boulder.rect.right = redDoor.left
+                                if horizontal < 0:
+                                        boulder.rect.left = redDoor.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = redDoor.top
+                                if vertical < 0:
+                                        boulder.rect.top = redDoor.bottom
+                if gKey:
+                        screen.blit(GK,greenKey)
+                        screen.blit(GD,greenDoor)
+                        if player.rect.colliderect(greenKey):
+                                gKey = False
+                        if boulder.rect.colliderect(greenKey):
+                                if horizontal > 0:
+                                        boulder.rect.right = greenKey.left
+                                if horizontal < 0:
+                                        boulder.rect.left = greenKey.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = greenKey.top
+                                if vertical < 0:
+                                        boulder.rect.top = greenKey.bottom
+                        if player.rect.colliderect(greenDoor):
+                                if horizontal > 0:
+                                        player.rect.right = greenDoor.left
+                                if horizontal < 0:
+                                        player.rect.left = greenDoor.right
+                                if vertical > 0:
+                                        player.rect.bottom = greenDoor.top
+                                if vertical < 0:
+                                        player.rect.top = greenDoor.bottom
+                        if boulder.rect.colliderect(greenDoor):
+                                if horizontal > 0:
+                                        boulder.rect.right = greenDoor.left
+                                if horizontal < 0:
+                                        boulder.rect.left = greenDoor.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = greenDoor.top
+                                if vertical < 0:
+                                        boulder.rect.top = greenDoor.bottom
+                if bKey:
+                        screen.blit(BK,blueKey)
+                        screen.blit(BD, blueDoor)
+                        if player.rect.colliderect(blueKey):
+                                bKey = False
+                        if boulder.rect.colliderect(blueKey):
+                                if horizontal > 0:
+                                        boulder.rect.right = blueKey.left
+                                if horizontal < 0:
+                                        boulder.rect.left = blueKey.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = blueKey.top
+                                if vertical < 0:
+                                        boulder.rect.top = blueKey.bottom
+                        if player.rect.colliderect(blueDoor):
+                                if horizontal > 0:
+                                        player.rect.right = blueDoor.left
+                                if horizontal < 0:
+                                        player.rect.left = blueDoor.right
+                                if vertical > 0:
+                                        player.rect.bottom = blueDoor.top
+                                if vertical < 0:
+                                        player.rect.top = blueDoor.bottom
+                        if boulder.rect.colliderect(blueDoor):
+                                if horizontal > 0:
+                                        boulder.rect.right = blueDoor.left
+                                if horizontal < 0:
+                                        boulder.rect.left = blueDoor.right
+                                if vertical > 0:
+                                        boulder.rect.bottom = blueDoor.top
+                                if vertical < 0:
+                                        boulder.rect.top = blueDoor.bottom
+                if yOn:
+                        screen.blit(YB,yellowButton)
+                        if yButton:
+                                screen.blit(YD,yellowDoor)
+                                if player.rect.colliderect(yellowButton):
+                                        yButton = False
+                                if boulder.rect.colliderect(yellowButton):
+                                        yButton = False
+                                        hitBoulder = boulder
+                                if player.rect.colliderect(yellowDoor):
+                                        if horizontal > 0:
+                                                player.rect.right = yellowDoor.left
+                                        if horizontal < 0:
+                                                player.rect.left = yellowDoor.right
+                                        if vertical > 0:
+                                                player.rect.bottom = yellowDoor.top
+                                        if vertical < 0:
+                                                player.rect.top = yellowDoor.bottom
+                                if boulder.rect.colliderect(yellowDoor):
+                                        if horizontal > 0:
+                                                boulder.rect.right = yellowDoor.left
+                                        if horizontal < 0:
+                                                boulder.rect.left = yellowDoor.right
+                                        if vertical > 0:
+                                                boulder.rect.bottom = yellowDoor.top
+                                        if vertical < 0:
+                                                boulder.rect.top = yellowDoor.bottom
+                        elif player.rect.colliderect(yellowButton): 
+                                yButton = False
+                        elif hitBoulder.rect.colliderect(yellowButton):
+                                yButton = False
+                        else:
+                                yButton = True
+                if oOn:
+                        screen.blit(OB,orangeButton)
+                        if oButton:
+                                screen.blit(OD,orangeDoor)
+                                if player.rect.colliderect(orangeButton):
+                                        oButton = False
+                                if boulder.rect.colliderect(orangeButton):
+                                        oButton = False
+                                        hitBoulder = boulder
+                                if player.rect.colliderect(orangeDoor):
+                                        if horizontal > 0:
+                                                player.rect.right = orangeDoor.left
+                                        if horizontal < 0:
+                                                player.rect.left = orangeDoor.right
+                                        if vertical > 0:
+                                                player.rect.bottom = orangeDoor.top
+                                        if vertical < 0:
+                                                player.rect.top = orangeDoor.bottom
+                                if boulder.rect.colliderect(orangeDoor):
+                                        if horizontal > 0:
+                                                boulder.rect.right = orangeDoor.left
+                                        if horizontal < 0:
+                                                boulder.rect.left = orangeDoor.right
+                                        if vertical > 0:
+                                                boulder.rect.bottom = orangeDoor.top
+                                        if vertical < 0:
+                                                boulder.rect.top = orangeDoor.bottom
+                        elif player.rect.colliderect(orangeButton): 
+                                oButton = False
+                        elif hitBoulder.rect.colliderect(orangeButton):
+                                oButton = False
+                        else:
+                                oButton = True
+                if pOn:
+                        screen.blit(PB,purpleButton)
+                        if pButton:
+                                screen.blit(PD,purpleDoor)
+                                if player.rect.colliderect(purpleButton):
+                                        pButton = False
+                                if boulder.rect.colliderect(purpleButton):
+                                        pButton = False
+                                        hitBoulder = boulder
+                                if player.rect.colliderect(purpleDoor):
+                                        if horizontal > 0:
+                                                player.rect.right = purpleDoor.left
+                                        if horizontal < 0:
+                                                player.rect.left = purpleDoor.right
+                                        if vertical > 0:
+                                                player.rect.bottom = purpleDoor.top
+                                        if vertical < 0:
+                                                player.rect.top = purpleDoor.bottom
+                                if boulder.rect.colliderect(purpleDoor):
+                                        if horizontal > 0:
+                                                boulder.rect.right = purpleDoor.left
+                                        if horizontal < 0:
+                                                boulder.rect.left = purpleDoor.right
+                                        if vertical > 0:
+                                                boulder.rect.bottom = purpleDoor.top
+                                        if vertical < 0:
+                                                boulder.rect.top = purpleDoor.bottom
+                        elif player.rect.colliderect(purpleButton): 
+                                pButton = False
+                        elif hitBoulder.rect.colliderect(purpleButton):
+                                pButton = False
+                        else:
+                                pButton = True
         for boulder in boulders:
-                pygame.draw.rect(screen,(151,102,0),boulder.rect)
-        if rKey:
-                pygame.draw.rect(screen,(255,0,0),redKey)
-                pygame.draw.rect(screen,(255,0,0), redDoor)
-                if player.rect.colliderect(redKey):
-                        rKey = False
-                if player.rect.colliderect(redDoor):
-                        if horizontal > 0:
-                                player.rect.right = redDoor.left
-                        if horizontal < 0:
-                                player.rect.left = redDoor.right
-                        if vertical > 0:
-                                player.rect.bottom = redDoor.top
-                        if vertical < 0:
-                                player.rect.top = redDoor.bottom
-        if gKey:
-                pygame.draw.rect(screen,(0,255,0),greenKey)
-                pygame.draw.rect(screen,(0,255,0), greenDoor)
-                if player.rect.colliderect(greenKey):
-                        gKey = False
-                if player.rect.colliderect(greenDoor):
-                        if horizontal > 0:
-                                player.rect.right = greenDoor.left
-                        if horizontal < 0:
-                                player.rect.left = greenDoor.right
-                        if vertical > 0:
-                                player.rect.bottom = greenDoor.top
-                        if vertical < 0:
-                                player.rect.top = greenDoor.bottom
-        if bKey:
-                pygame.draw.rect(screen,(0,0,255),blueKey)
-                pygame.draw.rect(screen,(0,0,255), blueDoor)
-                if player.rect.colliderect(blueKey):
-                        bKey = False
-                if player.rect.colliderect(blueDoor):
-                        if horizontal > 0:
-                                player.rect.right = blueDoor.left
-                        if horizontal < 0:
-                                player.rect.left = blueDoor.right
-                        if vertical > 0:
-                                player.rect.bottom = blueDoor.top
-                        if vertical < 0:
-                                player.rect.top = blueDoor.bottom
-        pygame.draw.rect(screen,(200,200,200),yellowButton)
-        if yButton:
-                pygame.draw.rect(screen,(0,0,255), yellowDoor)
-                if player.rect.colliderect(yellowButton):
-                        yButton = False
-                if player.rect.colliderect(yellowDoor):
-                        if horizontal > 0:
-                                player.rect.right = yellowDoor.left
-                        if horizontal < 0:
-                                player.rect.left = yellowDoor.right
-                        if vertical > 0:
-                                player.rect.bottom = yellowDoor.top
-                        if vertical < 0:
-                                player.rect.top = yellowDoor.bottom
-        elif player.rect.colliderect(yellowButton):
-                yButton = False
-        else:
-                yButton = True
-        pygame.draw.rect(screen, (255, 200, 0), player.rect)
+                screen.blit(BOULDER,boulder.rect)
+        screen.blit(PLAYER,player.rect)
         pygame.display.flip()
+        #print (yButton)
